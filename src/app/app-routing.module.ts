@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {StudentsPageComponent} from "./components/pages/students-page/students-page.component";
 
 const routes: Routes = [
-  { path: 'app', loadChildren: () => import('./components/pages/pages.module').then(m => m.PagesModule) },
-  { path: '**', component: StudentsPageComponent}
+  { path: '**', loadChildren: () => import('./components/pages/pages.module').then(m => m.PagesModule) },
 ];
 
 @NgModule({
