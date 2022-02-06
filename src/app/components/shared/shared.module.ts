@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { StepTabsComponent } from "./step-tabs/step-tabs.component";
 import {StepTabComponent} from "./step-tabs/step-tab/step-tab.component";
+import { StudentsComponent } from './students/students.component';
 
 
 
@@ -10,7 +11,8 @@ import {StepTabComponent} from "./step-tabs/step-tab/step-tab.component";
   declarations: [
     HeaderComponent,
     StepTabsComponent,
-    StepTabComponent
+    StepTabComponent,
+    StudentsComponent
   ],
   exports: [
     HeaderComponent,
