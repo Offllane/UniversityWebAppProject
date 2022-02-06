@@ -1,0 +1,26 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.student-list {
+  overflow: auto;
+
+  .student-item {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+
+    &.active {
+      background-color: #eaeaea;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+}

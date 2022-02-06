@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.student-list {
+  overflow: auto;
+}
+.student-list .student-item {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+.student-list .student-item.active {
+  background-color: #eaeaea;
+  font-weight: bold;
+}
+.student-list .student-item:hover {
+  background-color: #eaeaea;
+}
+
+/*# sourceMappingURL=students.component.css.map */

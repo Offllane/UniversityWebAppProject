@@ -6,6 +6,7 @@ import {StudentsPageComponent} from "./students-page/students-page.component";
 import {ContactsPageComponent} from "./contacts-page/contacts-page.component";
 import {EventsPageComponent} from "./events-page/events-page.component";
 import {CompaniesPageComponent} from "./companies-page/companies-page.component";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {CompaniesPageComponent} from "./companies-page/companies-page.component"
     CompaniesPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ],
   exports: [
     StudentsPageComponent,

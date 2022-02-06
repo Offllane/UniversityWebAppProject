@@ -1,1 +1,10 @@
-<p>students works!</p>
+<nav class="nav-wrapper">
+  <div class="student-list">
+    <div class="student-item"
+         *ngFor="let student of studentList; let index = index"
+         [ngClass]="{'active' : index === currentActiveStudentItemIndex}"
+         (click)="setStudentItemActive(index)">
+      {{student.name}}
+    </div>
+  </div>
+</nav>

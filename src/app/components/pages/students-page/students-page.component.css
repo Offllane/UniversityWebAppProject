@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 85vh;
+}
+.wrapper app-students {
+  width: 25%;
+}
+.wrapper app-student-events {
+  width: 70%;
+}
+
+/*# sourceMappingURL=students-page.component.css.map */

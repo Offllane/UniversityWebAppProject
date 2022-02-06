@@ -4,6 +4,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  margin-bottom: 30px;
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
@@ -18,6 +19,10 @@
       background-color: #405261;
       border-radius: 3px;
       opacity: 40%;
+    }
+
+    &.active {
+      font-weight: bold;
     }
 
     &.active:after {
