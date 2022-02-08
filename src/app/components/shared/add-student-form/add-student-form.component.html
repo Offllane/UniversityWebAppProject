@@ -1,0 +1,52 @@
+<div class="wrapper">
+  <form class="form">
+    <div class="form-header">
+      Add new student
+    </div>
+    <div class="form-body">
+      <div class="form-field">
+        <div class="form-field-label">Имя:</div>
+        <input type="text"
+               required
+               [(ngModel)]="addStudentFormGroup.name"
+               [ngModelOptions]="{standalone: true}"
+               (keyup)="checkFieldValidation()">
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Специальность:</div>
+        <select name="spec"
+                id="spec"
+                [(ngModel)]="addStudentFormGroup.spec"
+                [ngModelOptions]="{standalone: true}"
+                (change)="checkFieldValidation()">
+          <option *ngFor="let spec of specsArray" [ngValue]="spec.name"> {{spec.name}}</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Год поступления:</div>
+        <input type="number"
+               required
+               [(ngModel)]="addStudentFormGroup.year"
+               [ngModelOptions]="{standalone: true}"
+               (keyup)="checkFieldValidation()">
+      </div>
+      <div class="form-field">
+        <div class="form-field-label">Группа:</div>
+        <input type="number"
+               required
+               [ngModelOptions]="{standalone: true}"
+               [(ngModel)]="addStudentFormGroup.group"
+               (keyup)="checkFieldValidation()">
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button class="form-button"
+              [ngClass]="{'disabled': isContinueButtonDisabled}"
+              (click)="addStudent()"
+              [disabled]="isContinueButtonDisabled">
+        Добавить
+      </button>
+      <button class="form-button" (click)="closeAddStudentForm()">Отмена</button>
+    </div>
+  </form>
+</div>

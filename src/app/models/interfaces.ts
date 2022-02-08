@@ -1,20 +1,24 @@
-export interface Student {
-  id: number;
+export interface IStudent {
+  id?: number;
   name: string;
   spec: string;
   group: number;
   year: number;
 }
 
-export interface Company {
+export interface ICompany {
   id: number;
   name: string;
 }
 
-export interface StudentEvent {
+export interface IStudentEvent {
   id: number;
   date: string;
   text: string;
-  company: Company | null;
-  student: Student;
+  company: ICompany | null;
+  student: IStudent;
+}
+
+export interface ISpec {
+  name: string;
 }

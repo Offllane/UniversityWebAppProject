@@ -1,9 +1,22 @@
-nav {
+.nav-wrapper {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100% - 50px);
   width: 100%;
   border: 1px solid black;
+}
+
+.student-list-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 47px;
+  border: 1px solid black;
+  border-bottom: none;
+}
+.student-list-buttons .student-list-button {
+  width: 45px;
+  height: 45px;
 }
 
 .student-list {

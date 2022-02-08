@@ -5,6 +5,8 @@ import { StepTabsComponent } from "./step-tabs/step-tabs.component";
 import {StepTabComponent} from "./step-tabs/step-tab/step-tab.component";
 import { StudentsComponent } from './students/students.component';
 import { StudentEventsComponent } from './student-events/student-events.component';
+import { AddStudentFormComponent } from './add-student-form/add-student-form.component';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -14,7 +16,8 @@ import { StudentEventsComponent } from './student-events/student-events.componen
     StepTabsComponent,
     StepTabComponent,
     StudentsComponent,
-    StudentEventsComponent
+    StudentEventsComponent,
+    AddStudentFormComponent
   ],
     exports: [
         HeaderComponent,
@@ -23,8 +26,9 @@ import { StudentEventsComponent } from './student-events/student-events.componen
         StudentsComponent,
         StudentEventsComponent
     ],
-  imports: [
-    CommonModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule
+    ]
 })
 export class SharedModule { }

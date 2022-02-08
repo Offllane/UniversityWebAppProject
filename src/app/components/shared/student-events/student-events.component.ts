@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {Student, StudentEvent} from "../../../models/interfaces";
+import {IStudent, IStudentEvent} from "../../../models/interfaces";
 import {StudentService} from "../../../services/student.service";
 
 @Component({
@@ -10,20 +10,20 @@ import {StudentService} from "../../../services/student.service";
 })
 export class StudentEventsComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription = new Subscription();
-  public studentList: Array<Student> = [];
-  public studentsEventsList: Array<StudentEvent> = [];
-  public currentActiveStudent: Student | null = null;
-  public currentActiveStudentEvents: Array<StudentEvent> = [];
+  public studentList: Array<IStudent> = [];
+  public studentsEventsList: Array<IStudentEvent> = [];
+  public currentActiveStudent: IStudent | null = null;
+  public currentActiveStudentEvents: Array<IStudentEvent> = [];
 
   constructor(
     private studentService: StudentService
   ) { }
 
   ngOnInit(): void {
-    this.dataSubscription.add(this.studentService.studentsListSubject.subscribe((studentList: Array<Student>) => {
+    this.dataSubscription.add(this.studentService.studentsListSubject.subscribe((studentList: Array<IStudent>) => {
       this.studentList = studentList;
     }));
-    this.dataSubscription.add(this.studentService.studentsEventsSubject.subscribe((studentsEventsList: Array<StudentEvent>) => {
+    this.dataSubscription.add(this.studentService.studentsEventsSubject.subscribe((studentsEventsList: Array<IStudentEvent>) => {
       this.studentsEventsList = studentsEventsList;
     }));
     this.dataSubscription.add(this.studentService.currentActiveStudentItemIndexSubject.subscribe((index: number | null) => {
