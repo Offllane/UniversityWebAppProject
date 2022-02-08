@@ -1,11 +1,19 @@
-<div class="student-list-buttons" *ngIf="!addStudentFormDisplayed">
-  <div class="student-list-button icon add-user-icon" (click)="openAddStudentForm()"></div>
-  <div class="student-list-button icon delete-user-icon" *ngIf="currentActiveStudentItemIndex !== null"></div>
-  <div class="student-list-button icon change-user-icon" *ngIf="currentActiveStudentItemIndex !== null"></div>
+<div *ngIf="!addStudentFormDisplayed"
+     class="student-list-buttons">
+  <div class="student-list-button icon add-user-icon"
+       (click)="openAddStudentForm()"></div>
+  <div *ngIf="currentActiveStudentItemIndex !== null"
+        class="student-list-button icon delete-user-icon"></div>
+  <div *ngIf="currentActiveStudentItemIndex !== null"
+       class="student-list-button icon change-user-icon"
+       (click)="openUpdateStudentForm()"></div>
   <div class="student-list-button icon forward-icon"></div>
 </div>
 
-<app-add-student-form *ngIf="addStudentFormDisplayed">
+<app-add-student-form
+  *ngIf="addStudentFormDisplayed"
+  [addStudentFormGroup]="currentActiveStudentItem"
+  [isUpdateForm]="isUpdateFormNeeded">
 </app-add-student-form>
 
 <nav class="nav-wrapper">

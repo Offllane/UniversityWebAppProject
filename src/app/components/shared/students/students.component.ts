@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {StudentService} from "../../../services/student.service";
 import {IStudent} from "../../../models/interfaces";
 import {Subscription} from "rxjs";
+import {AddStudentFormComponent} from "../add-student-form/add-student-form.component";
 
 @Component({
   selector: 'app-students',
@@ -12,8 +13,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription = new Subscription();
   public currentActiveStudentItemIndex: number | null = null;
   public studentList: Array<IStudent> = [];
+  public currentActiveStudentItem: IStudent = this.studentList[0];
   public addStudentFormDisplayed = false;
   public isSelectStudentPossible = true;
+  public isUpdateFormNeeded = false;
 
   constructor(
     private studentService: StudentService
@@ -25,6 +28,17 @@ export class StudentsComponent implements OnInit, OnDestroy {
     }));
     this.dataSubscription.add(this.studentService.currentActiveStudentItemIndexSubject.subscribe((index: number | null) => {
       this.currentActiveStudentItemIndex = index;
+      if (index !== null) {
+        this.currentActiveStudentItem = {...this.studentList[index]};
+      } else {
+        this.currentActiveStudentItem = {
+          name: '',
+          spec: '',
+          year: new Date().getFullYear(),
+          group: 1
+        };
+      }
+
     }));
     this.dataSubscription.add(this.studentService.addStudentFormDisplayedSubject.subscribe((addStudentFormState: boolean) => {
       this.addStudentFormDisplayed = addStudentFormState;
@@ -40,6 +54,12 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   public openAddStudentForm(): void {
     this.studentService.changeAddStudentFormState(true);
+    this.isUpdateFormNeeded = false;
+  }
+
+  public openUpdateStudentForm(): void {
+    this.studentService.changeAddStudentFormState(true, true);
+    this.isUpdateFormNeeded = true;
   }
 
   public closeAddStudentForm(): void {

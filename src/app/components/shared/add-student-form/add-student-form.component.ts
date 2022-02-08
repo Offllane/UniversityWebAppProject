@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {IStudent} from "../../../models/interfaces";
 import {Data_Speciality} from "../../../models/data/Data_Speciality";
 import {StudentService} from "../../../services/student.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-add-student-form',
   templateUrl: './add-student-form.component.html',
   styleUrls: ['./add-student-form.component.scss']
 })
-export class AddStudentFormComponent implements OnInit {
-  public addStudentFormGroup: IStudent = {
+export class AddStudentFormComponent implements OnInit, OnDestroy {
+  @Input() isUpdateForm = false;
+  private dataSubscription: Subscription = new Subscription();
+  @Input() addStudentFormGroup: IStudent = {
     name: '',
     spec: '',
     year: new Date().getFullYear(),
     group: 1
-  }
+  };
   public specsArray = Data_Speciality;
   public isContinueButtonDisabled = true;
 
@@ -24,16 +27,20 @@ export class AddStudentFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  updateValue(propertyName: keyof IStudent, target: any): void {
+  updateFormValue(propertyName: keyof IStudent, target: any): void {
     // @ts-ignore
     this.addStudentFormGroup[propertyName] = target.value;
-    console.log(this.addStudentFormGroup);
   }
 
   addStudent(): void {
     this.studentService.addStudent(this.addStudentFormGroup);
     this.closeAddStudentForm();
     this.studentService.setCurrentActiveStudentIndex(0);
+  }
+
+  updateStudent(): void {
+    this.studentService.updateStudent(this.addStudentFormGroup);
+    this.closeAddStudentForm();
   }
 
   checkFieldValidation(): boolean {
@@ -49,5 +56,9 @@ export class AddStudentFormComponent implements OnInit {
 
   public closeAddStudentForm(): void {
     this.studentService.changeAddStudentFormState(false);
+  }
+
+  ngOnDestroy(): void {
+    this.dataSubscription.unsubscribe();
   }
 }

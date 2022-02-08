@@ -1,7 +1,10 @@
 <div class="wrapper">
   <form class="form">
-    <div class="form-header">
-      Add new student
+    <div class="form-header" *ngIf="!isUpdateForm">
+      Добавить студента
+    </div>
+    <div class="form-header" *ngIf="isUpdateForm">
+      Изменить студента
     </div>
     <div class="form-body">
       <div class="form-field">
@@ -40,11 +43,17 @@
       </div>
     </div>
     <div class="form-buttons">
-      <button class="form-button"
+      <button class="form-button" *ngIf="!isUpdateForm"
               [ngClass]="{'disabled': isContinueButtonDisabled}"
               (click)="addStudent()"
               [disabled]="isContinueButtonDisabled">
         Добавить
+      </button>
+      <button class="form-button" *ngIf="isUpdateForm"
+              [ngClass]="{'disabled': isContinueButtonDisabled}"
+              (click)="updateStudent()"
+              [disabled]="isContinueButtonDisabled">
+       Изменить
       </button>
       <button class="form-button" (click)="closeAddStudentForm()">Отмена</button>
     </div>

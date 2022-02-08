@@ -22,13 +22,20 @@ export class StudentService {
     this.currentActiveStudentItemIndexSubject.next(index);
   }
 
-  public addStudent(student: IStudent) {
+  public addStudent(student: IStudent): void {
     this.dataStudents.unshift(student);
     this.studentsListSubject.next(this.dataStudents);
   }
 
-  public changeAddStudentFormState(isFormShouldBeOpen: boolean): void {
-    if(isFormShouldBeOpen) {
+  public updateStudent(student: IStudent): void {
+    const neededStudentIndex = this.dataStudents.findIndex(_student => _student.id === student.id);
+    this.dataStudents[neededStudentIndex] = student;
+    this.studentsListSubject.next(this.dataStudents);
+    this.setCurrentActiveStudentIndex(neededStudentIndex);
+  }
+
+  public changeAddStudentFormState(isFormShouldBeOpen: boolean, isUpdateForm = false): void {
+    if(isFormShouldBeOpen && !isUpdateForm) {
       this.setCurrentActiveStudentIndex(null);
     }
     this.addStudentFormDisplayedSubject.next(isFormShouldBeOpen);
