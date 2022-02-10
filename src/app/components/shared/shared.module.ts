@@ -9,6 +9,7 @@ import { AddStudentFormComponent } from './add-student-form/add-student-form.com
 import {FormsModule} from "@angular/forms";
 import { DeleteStudentFormComponent } from './delete-student-form/delete-student-form.component';
 import { CompaniesComponent } from './companies/companies.component';
+import { CompaniesEventComponent } from './companies-event/companies-event.component';
 
 
 
@@ -21,7 +22,8 @@ import { CompaniesComponent } from './companies/companies.component';
     StudentEventsComponent,
     AddStudentFormComponent,
     DeleteStudentFormComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    CompaniesEventComponent
   ],
   exports: [
     HeaderComponent,
@@ -30,7 +32,8 @@ import { CompaniesComponent } from './companies/companies.component';
     StudentsComponent,
     StudentEventsComponent,
     DeleteStudentFormComponent,
-    CompaniesComponent
+    CompaniesComponent,
+    CompaniesEventComponent
   ],
     imports: [
         CommonModule,

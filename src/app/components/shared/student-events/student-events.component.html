@@ -1,10 +1,10 @@
-<div class="student-events-wrapper">
-  <div class="student-event-inform-header"
+<div class="events-wrapper">
+  <div class="event-inform-header"
        *ngIf="currentActiveStudent">
       {{currentActiveStudent.name}}, {{currentActiveStudent.spec}} - {{currentActiveStudent.year}} - {{currentActiveStudent.group}}
   </div>
   <div *ngIf="currentActiveStudentEvents">
-    <div class="student-event-inform"
+    <div class="event-inform"
          *ngFor="let studentEvent of currentActiveStudentEvents">
       {{studentEvent.id}}: {{studentEvent.date}}, {{studentEvent.company?.name}}, {{studentEvent.text}}
     </div>

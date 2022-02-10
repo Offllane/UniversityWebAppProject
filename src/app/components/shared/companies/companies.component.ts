@@ -27,7 +27,7 @@ export class CompaniesComponent implements OnInit {
   }
 
   setCompanyItemActive(index: number): void {
-    this.companyService.currentActiveCompanyIndex.next(index);
+    this.companyService.setActiveStudent(index);
   }
 
   ngOnDestroy(): void {

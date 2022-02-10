@@ -1,0 +1,15 @@
+
+
+<div class="events-wrapper">
+  <div class="event-inform-header"
+       *ngIf="currentActiveCompany">
+    {{currentActiveCompany.name}}
+  </div>
+  <div *ngIf="currentActiveCompany">
+    <div class="event-inform"
+         *ngFor="let companyEvent of currentActiveCompanyEventList">
+      {{companyEvent.id}}: {{companyEvent.date}}, {{companyEvent.student.name}}, {{companyEvent.text}}
+    </div>
+  </div>
+</div>
+
