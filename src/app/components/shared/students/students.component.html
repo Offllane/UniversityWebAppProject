@@ -1,9 +1,10 @@
-<div *ngIf="!addStudentFormDisplayed"
+<div *ngIf="!isAddStudentFormDisplayed && !isDeleteStudentFormDisplayed"
      class="student-list-buttons">
   <div class="student-list-button icon add-user-icon"
        (click)="openAddStudentForm()"></div>
   <div *ngIf="currentActiveStudentItemIndex !== null"
-        class="student-list-button icon delete-user-icon"></div>
+        class="student-list-button icon delete-user-icon"
+        (click)="openDeleteStudentForm()"></div>
   <div *ngIf="currentActiveStudentItemIndex !== null"
        class="student-list-button icon change-user-icon"
        (click)="openUpdateStudentForm()"></div>
@@ -11,10 +12,14 @@
 </div>
 
 <app-add-student-form
-  *ngIf="addStudentFormDisplayed"
+  *ngIf="isAddStudentFormDisplayed"
   [addStudentFormGroup]="currentActiveStudentItem"
   [isUpdateForm]="isUpdateFormNeeded">
 </app-add-student-form>
+
+<app-delete-student-form *ngIf="isDeleteStudentFormDisplayed">
+
+</app-delete-student-form>
 
 <nav class="nav-wrapper">
   <div class="student-list">

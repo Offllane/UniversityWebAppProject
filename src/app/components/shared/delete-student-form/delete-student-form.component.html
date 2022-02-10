@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <form class="form">
+    <div class="form-header">
+      Удаление студента
+    </div>
+
+    <div class="form-body">
+      {{currentActiveStudent?.name}}, {{currentActiveStudent?.spec}}-
+      {{currentActiveStudent?.year}}-{{currentActiveStudent?.year}}
+    </div>
+
+    <div class="form-buttons">
+      <div class="form-button" (click)="deleteStudent()">Удалить</div>
+      <div class="form-button" (click)="closeDeleteStudentForm()">Отмена</div>
+    </div>
+  </form>
+</div>

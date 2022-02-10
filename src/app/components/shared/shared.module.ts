@@ -7,6 +7,7 @@ import { StudentsComponent } from './students/students.component';
 import { StudentEventsComponent } from './student-events/student-events.component';
 import { AddStudentFormComponent } from './add-student-form/add-student-form.component';
 import {FormsModule} from "@angular/forms";
+import { DeleteStudentFormComponent } from './delete-student-form/delete-student-form.component';
 
 
 
@@ -17,14 +18,16 @@ import {FormsModule} from "@angular/forms";
     StepTabComponent,
     StudentsComponent,
     StudentEventsComponent,
-    AddStudentFormComponent
+    AddStudentFormComponent,
+    DeleteStudentFormComponent
   ],
     exports: [
         HeaderComponent,
         StepTabsComponent,
         StepTabComponent,
         StudentsComponent,
-        StudentEventsComponent
+        StudentEventsComponent,
+        DeleteStudentFormComponent
     ],
     imports: [
         CommonModule,

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {StudentService} from "../../../services/student.service";
 import {IStudent} from "../../../models/interfaces";
 import {Subscription} from "rxjs";
@@ -14,7 +14,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
   public currentActiveStudentItemIndex: number | null = null;
   public studentList: Array<IStudent> = [];
   public currentActiveStudentItem: IStudent = this.studentList[0];
-  public addStudentFormDisplayed = false;
+  public isAddStudentFormDisplayed = false;
+  public isDeleteStudentFormDisplayed = false;
   public isSelectStudentPossible = true;
   public isUpdateFormNeeded = false;
 
@@ -41,9 +42,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
     }));
     this.dataSubscription.add(this.studentService.addStudentFormDisplayedSubject.subscribe((addStudentFormState: boolean) => {
-      this.addStudentFormDisplayed = addStudentFormState;
+      this.isAddStudentFormDisplayed = addStudentFormState;
       this.isSelectStudentPossible = !addStudentFormState;
     }));
+    this.dataSubscription.add(this.studentService.deleteStudentFormDisplayedSubject.subscribe((deleteStudentFormState: boolean) => {
+      this.isDeleteStudentFormDisplayed = deleteStudentFormState;
+      this.isSelectStudentPossible = !deleteStudentFormState;
+    }))
   }
 
   public setStudentItemActive(index: number): void {
@@ -62,8 +67,8 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.isUpdateFormNeeded = true;
   }
 
-  public closeAddStudentForm(): void {
-    this.studentService.changeAddStudentFormState(false);
+  public openDeleteStudentForm(): void {
+    this.studentService.changeDeleteStudentFormState(true);
   }
 
   ngOnDestroy() {
