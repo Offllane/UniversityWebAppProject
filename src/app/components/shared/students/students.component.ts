@@ -48,7 +48,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.dataSubscription.add(this.studentService.deleteStudentFormDisplayedSubject.subscribe((deleteStudentFormState: boolean) => {
       this.isDeleteStudentFormDisplayed = deleteStudentFormState;
       this.isSelectStudentPossible = !deleteStudentFormState;
-    }))
+    }));
   }
 
   public setStudentItemActive(index: number): void {

@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <form class="form">
+    <div class="form-header">
+      Удаление компании
+    </div>
+
+    <div class="form-body">
+      {{currentActiveCompany?.name}}
+    </div>
+
+    <div class="form-buttons">
+      <div class="form-button" (click)="deleteCompany()">Удалить</div>
+      <div class="form-button" (click)="closeDeleteForm()">Отмена</div>
+    </div>
+  </form>
+</div>

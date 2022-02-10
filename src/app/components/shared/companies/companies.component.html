@@ -1,10 +1,10 @@
-<div *ngIf="!isAddCompanyDisplayed"
+<div *ngIf="!isAddFormDisplayed && !isDeleteFormNeeded"
      class="nav-list-buttons">
   <div class="nav-list-button icon add-company-icon"
        (click)="openAddForm()"></div>
   <div *ngIf="currentActiveCompanyIndex !== null"
        class="nav-list-button icon delete-company-icon"
-       ></div>
+       (click)="openDeleteForm()"></div>
   <div *ngIf="currentActiveCompanyIndex !== null"
        class="nav-list-button icon edit-icon"
        (click)="openUpdateForm()" ></div>
@@ -12,10 +12,14 @@
 </div>
 
 <app-add-company-form
-  *ngIf="isAddCompanyDisplayed"
+  *ngIf="isAddFormDisplayed"
   [isUpdateForm]="isUpdateFormNeeded"
   [addFormGroup]="currentActiveCompanyItem">
 </app-add-company-form>
+
+<app-delete-company-form *ngIf="isDeleteFormNeeded">
+
+</app-delete-company-form>
 
 <nav class="nav-wrapper">
   <div class="list">

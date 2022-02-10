@@ -30,7 +30,7 @@ export class CompaniesEventComponent implements OnInit, OnDestroy {
     this.dataSubscription.add(this.studentService.studentsEventsSubject.subscribe((eventsList: Array<IStudentEvent>) => {
       this.eventList = eventsList;
     }));
-    this.dataSubscription.add(this.companyService.currentActiveCompanyIndex.subscribe((index: number | null) => {
+    this.dataSubscription.add(this.companyService.currentActiveCompanyIndexSubject.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;
     }));
   }

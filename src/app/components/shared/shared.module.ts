@@ -11,6 +11,7 @@ import { DeleteStudentFormComponent } from './delete-student-form/delete-student
 import { CompaniesComponent } from './companies/companies.component';
 import { CompaniesEventComponent } from './companies-event/companies-event.component';
 import { AddCompanyFormComponent } from './add-company-form/add-company-form.component';
+import { DeleteCompanyFormComponent } from './delete-company-form/delete-company-form.component';
 
 
 
@@ -25,7 +26,8 @@ import { AddCompanyFormComponent } from './add-company-form/add-company-form.com
     DeleteStudentFormComponent,
     CompaniesComponent,
     CompaniesEventComponent,
-    AddCompanyFormComponent
+    AddCompanyFormComponent,
+    DeleteCompanyFormComponent
   ],
   exports: [
     HeaderComponent,

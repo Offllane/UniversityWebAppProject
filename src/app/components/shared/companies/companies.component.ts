@@ -12,9 +12,10 @@ export class CompaniesComponent implements OnInit {
   private dataSubscription: Subscription = new Subscription();
   public companyList: Array<ICompany> = [];
   public currentActiveCompanyIndex: number| null = null;
-  public isAddCompanyDisplayed: boolean = false;
+  public isAddFormDisplayed: boolean = false;
   public isSelectPossible = true;
   public isUpdateFormNeeded = false;
+  public isDeleteFormNeeded = false;
   public currentActiveCompanyItem: ICompany = this.companyList[0];
 
   constructor(
@@ -25,10 +26,10 @@ export class CompaniesComponent implements OnInit {
     this.dataSubscription.add(this.companyService.companyListSubject.subscribe((companyList: Array<ICompany>) => {
       this.companyList = companyList;
     }));
-    this.dataSubscription.add(this.companyService.currentActiveCompanyIndex.subscribe((index: number | null) => {
+    this.dataSubscription.add(this.companyService.currentActiveCompanyIndexSubject.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;
     }));
-    this.dataSubscription.add(this.companyService.currentActiveCompanyIndex.subscribe((index: number | null) => {
+    this.dataSubscription.add(this.companyService.currentActiveCompanyIndexSubject.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;
       if(index !== null) {
         this.currentActiveCompanyItem = {... this.companyList[index]};
@@ -39,8 +40,12 @@ export class CompaniesComponent implements OnInit {
       }
     }));
     this.dataSubscription.add(this.companyService.addCompanyFormDisplayedSubject.subscribe((addSFormState: boolean) => {
-      this.isAddCompanyDisplayed = addSFormState;
+      this.isAddFormDisplayed = addSFormState;
       this.isSelectPossible = !addSFormState;
+    }));
+    this.dataSubscription.add(this.companyService.deleteCompanyFormDisplayedSubject.subscribe((deleteFormState: boolean) => {
+      this.isDeleteFormNeeded = deleteFormState;
+      this.isSelectPossible = !deleteFormState;
     }));
   }
 
@@ -58,6 +63,10 @@ export class CompaniesComponent implements OnInit {
   public openUpdateForm(): void {
     this.companyService.changeAddFormState(true, true);
     this.isUpdateFormNeeded = true;
+  }
+
+  public openDeleteForm(): void {
+    this.companyService.changeDeleteFormState(true);
   }
 
   ngOnDestroy(): void {
