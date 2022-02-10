@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Data_Companies} from "../models/data/Data_Companies";
 import {BehaviorSubject} from "rxjs";
 import {ICompany} from "../models/interfaces";
+import {StudentService} from "./student.service";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ export class CompaniesService {
   public dataCompanies: Array<ICompany> = Data_Companies;
   public currentActiveCompanyIndex: number | null = null;
 
-  constructor() { }
+  constructor(
+    private studentService: StudentService
+  ) { }
 
   public setActiveCompany(index: number | null): void {
     this.currentActiveCompanyIndex = index;
@@ -54,6 +57,12 @@ export class CompaniesService {
   }
 
   public deleteCompany(companyIndex: number| null = this.currentActiveCompanyIndex): void {
+    const currentActiveCompany = this.dataCompanies[this.currentActiveCompanyIndex as number];
+    while(this.studentService.dataEvents.findIndex(event => event.company?.id === currentActiveCompany.id) !== -1) {
+      const neededIndex = this.studentService.dataEvents.findIndex(event => event.company?.id === currentActiveCompany.id)
+      this.studentService.dataEvents.splice(neededIndex, 1);
+      this.studentService.studentsEventsSubject.next(this.studentService.dataEvents);
+    }
     if (companyIndex !== null) {
       this.dataCompanies.splice(companyIndex, 1);
     }

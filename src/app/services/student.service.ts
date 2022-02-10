@@ -51,6 +51,12 @@ export class StudentService {
   }
 
   public deleteStudent(studentIndex = this.currentActiveStudentIndex) {
+    const currentActiveStudent = this.dataStudents[this.currentActiveStudentIndex as number]
+    while (this.dataEvents.findIndex(event => event.student.id === currentActiveStudent.id) !== -1) {
+      const neededIndex = this.dataEvents.findIndex(event => event.student.id === currentActiveStudent.id);
+      this.dataEvents.splice(neededIndex, 1);
+      this.studentsEventsSubject.next(this.dataEvents);
+    }
     if (studentIndex !== null) {
       this.dataStudents.splice(studentIndex, 1);
     }
@@ -98,7 +104,6 @@ export class StudentService {
   public deleteEvent(event: IStudentEvent): void {
     let neededIndex = this.dataEvents.findIndex(_event => _event.id === event.id)
     if (neededIndex !== -1) {
-      console.log('here');
       this.dataEvents.splice(neededIndex, 1);
     }
     this.studentsEventsSubject.next(this.dataEvents);
