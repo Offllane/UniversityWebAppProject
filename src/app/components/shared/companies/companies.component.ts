@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from "rxjs";
-import {ICompany} from "../../../models/interfaces";
+import {ICompany, IStudent} from "../../../models/interfaces";
 import {CompaniesService} from "../../../services/companies.service";
 
 @Component({
@@ -11,12 +11,14 @@ import {CompaniesService} from "../../../services/companies.service";
 export class CompaniesComponent implements OnInit {
   private dataSubscription: Subscription = new Subscription();
   public companyList: Array<ICompany> = [];
+  public searchedCompanyList: Array<ICompany> = []
   public currentActiveCompanyIndex: number| null = null;
   public isAddFormDisplayed: boolean = false;
   public isSelectPossible = true;
   public isUpdateFormNeeded = false;
   public isDeleteFormNeeded = false;
   public currentActiveCompanyItem: ICompany = this.companyList[0];
+  public isSearchNeeded = false;
 
   constructor(
     private companyService: CompaniesService
@@ -25,6 +27,7 @@ export class CompaniesComponent implements OnInit {
   ngOnInit(): void {
     this.dataSubscription.add(this.companyService.companyListSubject.subscribe((companyList: Array<ICompany>) => {
       this.companyList = companyList;
+      this.searchedCompanyList = companyList;
     }));
     this.dataSubscription.add(this.companyService.currentActiveCompanyIndexSubject.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;
@@ -49,9 +52,10 @@ export class CompaniesComponent implements OnInit {
     }));
   }
 
-  setCompanyItemActive(index: number): void {
+  setCompanyItemActive(id: number | undefined): void {
+    const neededIndex =  this.companyList.findIndex(company => company.id === id);
     if (this.isSelectPossible) {
-      this.companyService.setActiveCompany(index);
+      this.companyService.setActiveCompany(neededIndex);
     }
   }
 
@@ -68,6 +72,18 @@ export class CompaniesComponent implements OnInit {
   public openDeleteForm(): void {
     this.companyService.changeDeleteFormState(true);
   }
+
+  public searchCompanies(event: any): void {
+    this.companyService.setActiveCompany(null);
+    this.searchedCompanyList = this.companyList.filter((company: ICompany) => company.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    if (event.target.value === '') {
+      this.searchedCompanyList = this.companyList;
+    }
+  }
+  public toggleSearch(): void {
+    this.isSearchNeeded = !this.isSearchNeeded;
+  }
+
 
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();

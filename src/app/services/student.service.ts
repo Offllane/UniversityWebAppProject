@@ -44,8 +44,14 @@ export class StudentService {
   }
 
   public updateStudent(student: IStudent): void {
+    for (let i = 0; i < this.dataEvents.length; i++) {
+      if (this.dataEvents[i].student.id === student.id) {
+        this.dataEvents[i].student = student;
+      }
+    }
     const neededStudentIndex = this.dataStudents.findIndex(_student => _student.id === student.id);
     this.dataStudents[neededStudentIndex] = student;
+    this.studentsEventsSubject.next(this.dataEvents);
     this.studentsListSubject.next(this.dataStudents);
     this.setCurrentActiveStudentIndex(neededStudentIndex);
   }

@@ -8,8 +8,12 @@
   <div *ngIf="currentActiveStudentItemIndex !== null"
        class="nav-list-button icon edit-icon"
        (click)="openUpdateStudentForm()"></div>
-  <div class="nav-list-button icon search-icon"></div>
+  <div class="nav-list-button icon search-icon"
+       (click)="toggleSearch()"></div>
+  <input *ngIf="isSearchNeeded" type="text" (keyup)="searchStudents($event)">
 </div>
+
+
 
 <app-add-student-form
   *ngIf="isAddStudentFormDisplayed"
@@ -23,9 +27,9 @@
 <nav class="nav-wrapper">
   <div class="list">
     <div class="item"
-         *ngFor="let student of studentList; let index = index"
+         *ngFor="let student of searchedStudentList; let index = index"
          [ngClass]="{'active' : index === currentActiveStudentItemIndex}"
-         (click)="setStudentItemActive(index)">
+         (click)="setStudentItemActive(student.id)">
       {{student.name}}
     </div>
   </div>

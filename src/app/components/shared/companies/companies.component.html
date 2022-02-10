@@ -8,7 +8,9 @@
   <div *ngIf="currentActiveCompanyIndex !== null"
        class="nav-list-button icon edit-icon"
        (click)="openUpdateForm()" ></div>
-  <div class="nav-list-button icon search-icon"></div>
+  <div class="nav-list-button icon search-icon"
+       (click)="toggleSearch()"></div>
+  <input *ngIf="isSearchNeeded" type="text" (keyup)="searchCompanies($event)">
 </div>
 
 <app-add-company-form
@@ -24,9 +26,9 @@
 <nav class="nav-wrapper">
   <div class="list">
     <div class="item"
-         *ngFor="let company of companyList; let index = index"
+         *ngFor="let company of searchedCompanyList; let index = index"
          [ngClass]="{'active' : index === currentActiveCompanyIndex}"
-         (click)="setCompanyItemActive(index)">
+         (click)="setCompanyItemActive(company.id)">
       {{company.name}}
     </div>
   </div>

@@ -13,11 +13,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription = new Subscription();
   public currentActiveStudentItemIndex: number | null = null;
   public studentList: Array<IStudent> = [];
+  public searchedStudentList: Array<IStudent> = [];
   public currentActiveStudentItem: IStudent = this.studentList[0];
   public isAddStudentFormDisplayed = false;
   public isDeleteStudentFormDisplayed = false;
   public isSelectStudentPossible = true;
   public isUpdateFormNeeded = false;
+  public isSearchNeeded = false;
 
   constructor(
     private studentService: StudentService
@@ -26,6 +28,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSubscription.add(this.studentService.studentsListSubject.subscribe((studentList: Array<IStudent>) => {
       this.studentList = studentList;
+      this.searchedStudentList = studentList;
     }));
     this.dataSubscription.add(this.studentService.currentActiveStudentItemIndexSubject.subscribe((index: number | null) => {
       this.currentActiveStudentItemIndex = index;
@@ -51,9 +54,10 @@ export class StudentsComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public setStudentItemActive(index: number): void {
+  public setStudentItemActive(id: number | undefined): void {
+    const neededIndex =  this.studentList.findIndex(student => student.id === id);
     if (this.isSelectStudentPossible) {
-      this.studentService.setCurrentActiveStudentIndex(index);
+      this.studentService.setCurrentActiveStudentIndex(neededIndex);
     }
   }
 
@@ -69,6 +73,18 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   public openDeleteStudentForm(): void {
     this.studentService.changeDeleteStudentFormState(true);
+  }
+
+  public searchStudents(event: any): void {
+      this.studentService.setCurrentActiveStudentIndex(null);
+      this.searchedStudentList = this.studentList.filter((student: IStudent) => student.name.toLowerCase().includes(event.target.value.toLowerCase()));
+      if (event.target.value === '') {
+          this.searchedStudentList = this.studentList;
+      }
+  }
+
+  public toggleSearch(): void {
+      this.isSearchNeeded = !this.isSearchNeeded;
   }
 
   ngOnDestroy() {

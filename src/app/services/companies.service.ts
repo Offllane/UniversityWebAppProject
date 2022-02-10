@@ -50,9 +50,15 @@ export class CompaniesService {
   }
 
   public updateCompany(company: ICompany): void {
+    for (let i = 0; i < this.studentService.dataEvents.length; i++) {
+      if (this.studentService.dataEvents[i].company?.id === company.id) {
+        this.studentService.dataEvents[i].company = company;
+      }
+    }
     const neededStudentIndex = this.dataCompanies.findIndex(_company => _company.id === company.id);
     this.dataCompanies[neededStudentIndex] = company;
     this.companyListSubject.next(this.dataCompanies);
+    this.studentService.studentsEventsSubject.next(this.studentService.dataEvents);
     this.setActiveCompany(neededStudentIndex);
   }
 
