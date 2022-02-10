@@ -7,12 +7,14 @@
        ></div>
   <div *ngIf="currentActiveCompanyIndex !== null"
        class="nav-list-button icon edit-icon"
-       ></div>
+       (click)="openUpdateForm()" ></div>
   <div class="nav-list-button icon search-icon"></div>
 </div>
 
-<app-add-company-form *ngIf="isAddCompanyDisplayed">
-
+<app-add-company-form
+  *ngIf="isAddCompanyDisplayed"
+  [isUpdateForm]="isUpdateFormNeeded"
+  [addFormGroup]="currentActiveCompanyItem">
 </app-add-company-form>
 
 <nav class="nav-wrapper">

@@ -14,6 +14,8 @@ export class CompaniesComponent implements OnInit {
   public currentActiveCompanyIndex: number| null = null;
   public isAddCompanyDisplayed: boolean = false;
   public isSelectPossible = true;
+  public isUpdateFormNeeded = false;
+  public currentActiveCompanyItem: ICompany = this.companyList[0];
 
   constructor(
     private companyService: CompaniesService
@@ -26,6 +28,16 @@ export class CompaniesComponent implements OnInit {
     this.dataSubscription.add(this.companyService.currentActiveCompanyIndex.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;
     }));
+    this.dataSubscription.add(this.companyService.currentActiveCompanyIndex.subscribe((index: number | null) => {
+      this.currentActiveCompanyIndex = index;
+      if(index !== null) {
+        this.currentActiveCompanyItem = {... this.companyList[index]};
+      } else {
+        this.currentActiveCompanyItem = {
+          name: '',
+        };
+      }
+    }));
     this.dataSubscription.add(this.companyService.addCompanyFormDisplayedSubject.subscribe((addSFormState: boolean) => {
       this.isAddCompanyDisplayed = addSFormState;
       this.isSelectPossible = !addSFormState;
@@ -34,12 +46,18 @@ export class CompaniesComponent implements OnInit {
 
   setCompanyItemActive(index: number): void {
     if (this.isSelectPossible) {
-      this.companyService.setActiveStudent(index);
+      this.companyService.setActiveCompany(index);
     }
   }
 
   public openAddForm(): void {
     this.companyService.changeAddFormState(true);
+    this.isUpdateFormNeeded = false;
+  }
+
+  public openUpdateForm(): void {
+    this.companyService.changeAddFormState(true, true);
+    this.isUpdateFormNeeded = true;
   }
 
   ngOnDestroy(): void {

@@ -40,11 +40,12 @@ export class AddCompanyFormComponent implements OnInit, OnDestroy {
   addCompany(): void {
     this.companyService.addCompany(this.addFormGroup);
     this.closeAddForm();
-    this.companyService.setActiveStudent(null);
+    this.companyService.setActiveCompany(0);
   }
 
   updateCompany(): void {
-
+    this.companyService.updateCompany(this.addFormGroup);
+    this.closeAddForm();
   }
 
   closeAddForm(): void {
