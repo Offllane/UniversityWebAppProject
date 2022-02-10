@@ -47,6 +47,49 @@
       </div>
     </form>
   </div>
+  <div class="wrapper events-wrapper-form" *ngIf="isUpdateEventFormNeeded">
+    <form class="form">
+      <div class="form-header">
+        Изменить событие
+      </div>
+      <div class="form-body">
+        <div class="form-field">
+          <div class="form-field-label">Дата:</div>
+          <input type="date"
+                 required
+                 [(ngModel)]="studentEventFormGroup.date"
+                 [ngModelOptions]="{standalone: true}"
+                 (keyup)="checkFieldValidation()">
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Компания:</div>
+          <select name="spec"
+                  [(ngModel)]="studentEventFormGroup.company"
+                  [ngModelOptions]="{standalone: true}"
+                  (change)="checkFieldValidation()">
+            <option *ngFor="let company of companiesList" [ngValue]="company"> {{company.name}}</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Описание:</div>
+          <input type="text"
+                 required
+                 [(ngModel)]="studentEventFormGroup.text"
+                 [ngModelOptions]="{standalone: true}"
+                 (keyup)="checkFieldValidation()">
+        </div>
+      </div>
+      <div class="form-buttons">
+        <button class="form-button"
+                [ngClass]="{'disabled': isContinueButtonDisabled}"
+                (click)="updateEvent()"
+                [disabled]="isContinueButtonDisabled">
+          Изменить
+        </button>
+        <button class="form-button" (click)="closeUpdateEventForm()">Отмена</button>
+      </div>
+    </form>
+  </div>
 
   <div class="event-buttons" *ngIf="currentActiveStudent">
     <div class="icon add-event-icon event-button" (click)="openEventForm()"></div>
@@ -54,7 +97,11 @@
   <div *ngIf="currentActiveStudentEvents">
     <div class="event-inform"
          *ngFor="let studentEvent of currentActiveStudentEvents">
-      {{studentEvent.id}}: {{studentEvent.date}}, {{studentEvent.company?.name}}, {{studentEvent.text}}
+      <div>{{studentEvent.id}}: {{studentEvent.date}}, {{studentEvent.company?.name}}, {{studentEvent.text}}</div>
+      <div class="event-inform-buttons">
+        <div class="icon cancel-event-icon" (click)="deleteEvent(studentEvent)"></div>
+        <div class="icon edit-icon" (click)="openUpdateEventForm(studentEvent)"></div>
+      </div>
     </div>
   </div>
 </div>

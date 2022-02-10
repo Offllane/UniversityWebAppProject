@@ -15,6 +15,7 @@ export class StudentService {
   public addStudentFormDisplayedSubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public deleteStudentFormDisplayedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public addEventFormDisplayedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public updateEventFormDisplayedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public dataStudents: Array<IStudent> = Data_Students;
   public dataEvents: Array<IStudentEvent> = Data_Events;
@@ -73,6 +74,10 @@ export class StudentService {
     this.addEventFormDisplayedSubject.next(isFormShouldBeOpen);
   }
 
+  public changeUpdateEventFormState(isFormShouldBeOpen: boolean): void {
+    this.updateEventFormDisplayedSubject.next(isFormShouldBeOpen)
+  }
+
   public addEvent(event: IStudentEvent): void {
    let maxId = this.arrayMax(this.dataEvents.map(event => event.id));
    event = {
@@ -82,6 +87,21 @@ export class StudentService {
     this.dataEvents.push(event);
     this.studentsEventsSubject.next(this.dataEvents);
     this.setCurrentActiveStudentIndex(this.currentActiveStudentIndex);
+  }
+
+  public updateEvent(event: IStudentEvent): void {
+    const neededIndex = this.dataEvents.findIndex(_event => _event.id === event.id);
+    this.dataEvents[neededIndex] = event;
+    this.studentsEventsSubject.next(this.dataEvents);
+  }
+
+  public deleteEvent(event: IStudentEvent): void {
+    let neededIndex = this.dataEvents.findIndex(_event => _event.id === event.id)
+    if (neededIndex !== -1) {
+      console.log('here');
+      this.dataEvents.splice(neededIndex, 1);
+    }
+    this.studentsEventsSubject.next(this.dataEvents);
   }
 
   private arrayMax(arr: Array<any>) {

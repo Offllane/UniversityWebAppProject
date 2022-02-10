@@ -22,7 +22,14 @@
   }
 
   .event-inform {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     font-size: 18px;
+
+    .event-inform-buttons {
+      display: flex;
+    }
   }
 }

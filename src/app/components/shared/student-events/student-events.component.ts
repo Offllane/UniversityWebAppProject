@@ -18,6 +18,7 @@ export class StudentEventsComponent implements OnInit, OnDestroy {
   public currentActiveStudentEvents: Array<IStudentEvent> = [];
   public isContinueButtonDisabled = true;
   public isAddEventFormNeeded: boolean = false;
+  public isUpdateEventFormNeeded: boolean = false;
   public studentEventFormGroup: IStudentEvent = {
     date: '',
     text: '',
@@ -36,6 +37,9 @@ export class StudentEventsComponent implements OnInit, OnDestroy {
     }));
     this.dataSubscription.add(this.studentService.studentsEventsSubject.subscribe((studentsEventsList: Array<IStudentEvent>) => {
       this.studentsEventsList = studentsEventsList;
+      this.currentActiveStudentEvents = this.studentsEventsList.filter(event => {
+        return event.student.id === this.currentActiveStudent?.id;
+      });
     }));
     this.dataSubscription.add(this.studentService.currentActiveStudentItemIndexSubject.subscribe((index: number | null) => {
       if (index !== null) {
@@ -54,6 +58,9 @@ export class StudentEventsComponent implements OnInit, OnDestroy {
     this.dataSubscription.add(this.studentService.addEventFormDisplayedSubject.subscribe((addEventFormState: boolean) => {
       this.isAddEventFormNeeded = addEventFormState;
     }));
+    this.dataSubscription.add(this.studentService.updateEventFormDisplayedSubject.subscribe((addEventFormState: boolean) => {
+      this.isUpdateEventFormNeeded = addEventFormState;
+    }));
   }
 
   checkFieldValidation(): boolean {
@@ -68,11 +75,30 @@ export class StudentEventsComponent implements OnInit, OnDestroy {
     this.studentService.changeEventFormState(true);
   }
 
+  openUpdateEventForm(event: IStudentEvent): void{
+    this.studentService.changeUpdateEventFormState(true);
+    this.studentEventFormGroup = {...event};
+  }
+
+  closeUpdateEventForm(): void{
+    this.studentService.changeUpdateEventFormState(false);
+  }
+
   addEvent(event: IStudentEvent = this.studentEventFormGroup) {
     if (this.currentActiveStudent) {
       this.studentEventFormGroup.student = this.currentActiveStudent;
     }
     this.studentService.addEvent(event);
+  }
+
+  updateEvent(event: IStudentEvent = this.studentEventFormGroup) {
+    event = {...event};
+    this.studentService.updateEvent(event);
+    this.closeUpdateEventForm();
+  }
+
+  deleteEvent(event: IStudentEvent) {
+    this.studentService.deleteEvent(event);
   }
 
   closeAddEventForm(): void {
