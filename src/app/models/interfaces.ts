@@ -12,7 +12,7 @@ export interface ICompany {
 }
 
 export interface IStudentEvent {
-  id: number;
+  id?: number;
   date: string;
   text: string;
   company: ICompany | null;

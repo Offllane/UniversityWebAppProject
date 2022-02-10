@@ -44,38 +44,39 @@
 
         select {
           width: 50%;
+          height: 25px;
         }
       }
     }
+  }
+}
 
-    .form-buttons {
-      display: flex;
-      justify-content: space-evenly;
-      width: 100%;
+.form-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 
-      .form-button {
-        display: flex;
-        justify-content: center;
-        width: 40%;
-        padding: 15px;
-        border: none;
-        border-radius: 5px;
+  .form-button {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1b5687;
+    color: #fff;
+    cursor: pointer;
+
+
+    &:hover {
+      background-color: #0d2b41;
+    }
+
+    &.disabled {
+      opacity: .5;
+
+      &:hover {
         background-color: #1b5687;
-        color: #fff;
-        cursor: pointer;
-
-
-        &:hover {
-          background-color: #0d2b41;
-        }
-
-        &.disabled {
-          opacity: .5;
-
-          &:hover {
-            background-color: #1b5687;
-          }
-        }
       }
     }
   }

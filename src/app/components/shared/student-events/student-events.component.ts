@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {IStudent, IStudentEvent} from "../../../models/interfaces";
+import {ICompany, IStudent, IStudentEvent} from "../../../models/interfaces";
 import {StudentService} from "../../../services/student.service";
+import {CompaniesService} from "../../../services/companies.service";
 
 @Component({
   selector: 'app-student-events',
@@ -11,12 +12,22 @@ import {StudentService} from "../../../services/student.service";
 export class StudentEventsComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription = new Subscription();
   public studentList: Array<IStudent> = [];
+  public companiesList: Array<ICompany> = [];
   public studentsEventsList: Array<IStudentEvent> = [];
   public currentActiveStudent: IStudent | null = null;
   public currentActiveStudentEvents: Array<IStudentEvent> = [];
+  public isContinueButtonDisabled = true;
+  public isAddEventFormNeeded: boolean = false;
+  public studentEventFormGroup: IStudentEvent = {
+    date: '',
+    text: '',
+    company: null,
+    student: this.currentActiveStudent as IStudent
+  }
 
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService,
+    private companyService: CompaniesService
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +48,35 @@ export class StudentEventsComponent implements OnInit, OnDestroy {
         this.currentActiveStudentEvents = [];
       }
     }));
+    this.dataSubscription.add(this.companyService.companyListSubject.subscribe((companiesList: Array<ICompany>) => {
+      this.companiesList = companiesList;
+    }));
+    this.dataSubscription.add(this.studentService.addEventFormDisplayedSubject.subscribe((addEventFormState: boolean) => {
+      this.isAddEventFormNeeded = addEventFormState;
+    }));
+  }
+
+  checkFieldValidation(): boolean {
+    const isAllFormFieldValid = this.studentEventFormGroup.date !== '' &&
+      this.studentEventFormGroup.text !== '';
+
+    this.isContinueButtonDisabled = !isAllFormFieldValid;
+    return  isAllFormFieldValid;
+  }
+
+  openEventForm(): void {
+    this.studentService.changeEventFormState(true);
+  }
+
+  addEvent(event: IStudentEvent = this.studentEventFormGroup) {
+    if (this.currentActiveStudent) {
+      this.studentEventFormGroup.student = this.currentActiveStudent;
+    }
+    this.studentService.addEvent(event);
+  }
+
+  closeAddEventForm(): void {
+    this.studentService.changeEventFormState(false);
   }
 
   ngOnDestroy() {

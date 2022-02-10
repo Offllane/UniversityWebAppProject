@@ -3,6 +3,54 @@
        *ngIf="currentActiveStudent">
       {{currentActiveStudent.name}}, {{currentActiveStudent.spec}} - {{currentActiveStudent.year}} - {{currentActiveStudent.group}}
   </div>
+  <div class="wrapper events-wrapper-form" *ngIf="isAddEventFormNeeded">
+    <form class="form">
+      <div class="form-header">
+        Добавить событие
+      </div>
+      <div class="form-body">
+        <div class="form-field">
+          <div class="form-field-label">Дата:</div>
+          <input type="date"
+                 required
+                 [(ngModel)]="studentEventFormGroup.date"
+                 [ngModelOptions]="{standalone: true}"
+                 (keyup)="checkFieldValidation()">
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Компания:</div>
+          <select name="spec"
+                  id="spec"
+                  [(ngModel)]="studentEventFormGroup.company"
+                  [ngModelOptions]="{standalone: true}"
+                  (change)="checkFieldValidation()">
+            <option *ngFor="let company of companiesList" [ngValue]="company"> {{company.name}}</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <div class="form-field-label">Описание:</div>
+          <input type="text"
+                 required
+                 [(ngModel)]="studentEventFormGroup.text"
+                 [ngModelOptions]="{standalone: true}"
+                 (keyup)="checkFieldValidation()">
+        </div>
+      </div>
+      <div class="form-buttons">
+        <button class="form-button"
+                [ngClass]="{'disabled': isContinueButtonDisabled}"
+                (click)="addEvent()"
+                [disabled]="isContinueButtonDisabled">
+          Добавить
+        </button>
+        <button class="form-button" (click)="closeAddEventForm()">Отмена</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="event-buttons" *ngIf="currentActiveStudent">
+    <div class="icon add-event-icon event-button" (click)="openEventForm()"></div>
+  </div>
   <div *ngIf="currentActiveStudentEvents">
     <div class="event-inform"
          *ngFor="let studentEvent of currentActiveStudentEvents">

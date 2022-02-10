@@ -24,11 +24,11 @@ export class CompaniesEventComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSubscription.add(this.companyService.currentActiveCompanyItem.subscribe((company: ICompany | null) => {
       this.currentActiveCompany = company;
-      this.currentActiveCompanyEventList = this.eventList.filter(event => event.company?.id === this.currentActiveCompanyIndex);
-
+      this.currentActiveCompanyEventList = this.eventList.filter(event => event.company?.id === this.currentActiveCompany?.id);
     }));
     this.dataSubscription.add(this.studentService.studentsEventsSubject.subscribe((eventsList: Array<IStudentEvent>) => {
       this.eventList = eventsList;
+      this.currentActiveCompanyEventList = this.eventList.filter(event => event.company?.id === this.currentActiveCompany?.id);
     }));
     this.dataSubscription.add(this.companyService.currentActiveCompanyIndexSubject.subscribe((index: number | null) => {
       this.currentActiveCompanyIndex = index;

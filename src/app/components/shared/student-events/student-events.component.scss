@@ -1,1 +1,19 @@
 @import '../events';
+@import '../form-styles';
+
+.events-wrapper-form {
+  max-width: 400px;
+  margin: 20px;
+}
+
+.event-buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  .event-button {
+    width: 45px;
+    height: 45px;
+    margin: 15px;
+  }
+}
