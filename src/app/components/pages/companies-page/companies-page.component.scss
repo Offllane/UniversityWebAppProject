@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 85vh;
+
+  app-companies {
+    width: 25%;
+  }
+
+  //app-companies-event {
+  //  width: 70%;
+  //}
+}

@@ -1,0 +1,41 @@
+.nav-wrapper{
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 50px);
+  width: 100%;
+  border: 1px solid black;
+}
+
+.nav-list-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 47px;
+  border: 1px solid black;
+  border-bottom: none;
+
+  .nav-list-button {
+    width: 45px;
+    height: 45px;
+
+  }
+}
+
+.list {
+  overflow: auto;
+
+  .item {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+
+    &.active {
+      background-color: #eaeaea;
+      font-weight: bold;
+    }
+
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+}

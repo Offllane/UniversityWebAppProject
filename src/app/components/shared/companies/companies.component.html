@@ -1,0 +1,10 @@
+<nav class="nav-wrapper">
+  <div class="list">
+    <div class="item"
+         *ngFor="let company of companyList; let index = index"
+         [ngClass]="{'active' : index === currentActiveCompanyIndex}"
+         (click)="setCompanyItemActive(index)">
+      {{company.name}}
+    </div>
+  </div>
+</nav>

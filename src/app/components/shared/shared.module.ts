@@ -8,6 +8,7 @@ import { StudentEventsComponent } from './student-events/student-events.componen
 import { AddStudentFormComponent } from './add-student-form/add-student-form.component';
 import {FormsModule} from "@angular/forms";
 import { DeleteStudentFormComponent } from './delete-student-form/delete-student-form.component';
+import { CompaniesComponent } from './companies/companies.component';
 
 
 
@@ -19,16 +20,18 @@ import { DeleteStudentFormComponent } from './delete-student-form/delete-student
     StudentsComponent,
     StudentEventsComponent,
     AddStudentFormComponent,
-    DeleteStudentFormComponent
+    DeleteStudentFormComponent,
+    CompaniesComponent
   ],
-    exports: [
-        HeaderComponent,
-        StepTabsComponent,
-        StepTabComponent,
-        StudentsComponent,
-        StudentEventsComponent,
-        DeleteStudentFormComponent
-    ],
+  exports: [
+    HeaderComponent,
+    StepTabsComponent,
+    StepTabComponent,
+    StudentsComponent,
+    StudentEventsComponent,
+    DeleteStudentFormComponent,
+    CompaniesComponent
+  ],
     imports: [
         CommonModule,
         FormsModule

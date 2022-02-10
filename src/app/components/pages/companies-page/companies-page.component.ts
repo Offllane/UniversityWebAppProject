@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from "rxjs";
+import {CompaniesService} from "../../../services/companies.service";
+import {ICompany} from "../../../models/interfaces";
 
 @Component({
   selector: 'app-companies-page',

@@ -6,7 +6,7 @@
   border: 1px solid black;
 }
 
-.student-list-buttons {
+.nav-list-buttons {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -14,24 +14,24 @@
   border: 1px solid black;
   border-bottom: none;
 }
-.student-list-buttons .student-list-button {
+.nav-list-buttons .nav-list-button {
   width: 45px;
   height: 45px;
 }
 
-.student-list {
+.list {
   overflow: auto;
 }
-.student-list .student-item {
+.list .item {
   width: 100%;
   padding: 10px;
   cursor: pointer;
 }
-.student-list .student-item.active {
+.list .item.active {
   background-color: #eaeaea;
   font-weight: bold;
 }
-.student-list .student-item:hover {
+.list .item:hover {
   background-color: #eaeaea;
 }
 

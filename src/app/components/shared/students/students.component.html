@@ -1,14 +1,14 @@
 <div *ngIf="!isAddStudentFormDisplayed && !isDeleteStudentFormDisplayed"
-     class="student-list-buttons">
-  <div class="student-list-button icon add-user-icon"
+     class="nav-list-buttons">
+  <div class="nav-list-button icon add-user-icon"
        (click)="openAddStudentForm()"></div>
   <div *ngIf="currentActiveStudentItemIndex !== null"
-        class="student-list-button icon delete-user-icon"
+        class="nav-list-button icon delete-user-icon"
         (click)="openDeleteStudentForm()"></div>
   <div *ngIf="currentActiveStudentItemIndex !== null"
-       class="student-list-button icon change-user-icon"
+       class="nav-list-button icon change-user-icon"
        (click)="openUpdateStudentForm()"></div>
-  <div class="student-list-button icon forward-icon"></div>
+  <div class="nav-list-button icon forward-icon"></div>
 </div>
 
 <app-add-student-form
@@ -22,8 +22,8 @@
 </app-delete-student-form>
 
 <nav class="nav-wrapper">
-  <div class="student-list">
-    <div class="student-item"
+  <div class="list">
+    <div class="item"
          *ngFor="let student of studentList; let index = index"
          [ngClass]="{'active' : index === currentActiveStudentItemIndex}"
          (click)="setStudentItemActive(index)">
