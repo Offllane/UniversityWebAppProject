@@ -7,10 +7,11 @@ import {ICompany} from "../models/interfaces";
   providedIn: 'root'
 })
 export class CompaniesService {
-  public dataEventsListSubject: BehaviorSubject<Array<ICompany>> = new BehaviorSubject<Array<ICompany>>(Data_Companies);
+  public companyListSubject: BehaviorSubject<Array<ICompany>> = new BehaviorSubject<Array<ICompany>>(Data_Companies);
   public currentActiveCompanyIndex: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
-  public currentActiveCompanyItem: BehaviorSubject<ICompany | null> = new BehaviorSubject<ICompany | null>(null)
-  public dataCompanies = Data_Companies;
+  public currentActiveCompanyItem: BehaviorSubject<ICompany | null> = new BehaviorSubject<ICompany | null>(null);
+  public addCompanyFormDisplayedSubject:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public dataCompanies: Array<ICompany> = Data_Companies;
 
   constructor() { }
 
@@ -19,5 +20,17 @@ export class CompaniesService {
     if(index !== null) {
       this.currentActiveCompanyItem.next(this.dataCompanies[index]);
     }
+  }
+
+  public changeAddFormState(isFormShouldBeOpen: boolean, isUpdateForm = false): void {
+    if(isFormShouldBeOpen && !isUpdateForm) {
+      this.setActiveStudent(null);
+    }
+    this.addCompanyFormDisplayedSubject.next(isFormShouldBeOpen);
+  }
+
+  public addCompany(company: ICompany): void {
+    this.dataCompanies.unshift(company);
+    this.companyListSubject.next(this.dataCompanies);
   }
 }

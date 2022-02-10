@@ -7,7 +7,7 @@ export interface IStudent {
 }
 
 export interface ICompany {
-  id: number;
+  id?: number;
   name: string;
 }
 

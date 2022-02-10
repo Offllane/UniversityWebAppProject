@@ -44,4 +44,20 @@ app-root {
   &.forward-icon {
     background-image: url("./assets/img/forward.png");
   }
+
+  &.search-icon {
+    background-image: url("./assets/img/search.png");
+  }
+
+  &.edit-icon {
+    background-image: url("./assets/img/editing.png");
+  }
+
+  &.add-company-icon {
+    background-image: url("./assets/img/commission.png");
+  }
+
+  &.delete-company-icon {
+    background-image: url("./assets/img/shut-down.png");
+  }
 }

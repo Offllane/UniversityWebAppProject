@@ -1,3 +1,20 @@
+<div *ngIf="!isAddCompanyDisplayed"
+     class="nav-list-buttons">
+  <div class="nav-list-button icon add-company-icon"
+       (click)="openAddForm()"></div>
+  <div *ngIf="currentActiveCompanyIndex !== null"
+       class="nav-list-button icon delete-company-icon"
+       ></div>
+  <div *ngIf="currentActiveCompanyIndex !== null"
+       class="nav-list-button icon edit-icon"
+       ></div>
+  <div class="nav-list-button icon search-icon"></div>
+</div>
+
+<app-add-company-form *ngIf="isAddCompanyDisplayed">
+
+</app-add-company-form>
+
 <nav class="nav-wrapper">
   <div class="list">
     <div class="item"

@@ -6,9 +6,9 @@
         class="nav-list-button icon delete-user-icon"
         (click)="openDeleteStudentForm()"></div>
   <div *ngIf="currentActiveStudentItemIndex !== null"
-       class="nav-list-button icon change-user-icon"
+       class="nav-list-button icon edit-icon"
        (click)="openUpdateStudentForm()"></div>
-  <div class="nav-list-button icon forward-icon"></div>
+  <div class="nav-list-button icon search-icon"></div>
 </div>
 
 <app-add-student-form

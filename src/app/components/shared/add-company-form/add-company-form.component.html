@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <form class="form">
+    <div class="form-header" *ngIf="!isUpdateForm">
+      Добавить компанию
+    </div>
+    <div class="form-header" *ngIf="isUpdateForm">
+      Изменить компанию
+    </div>
+    <div class="form-body">
+      <div class="form-field">
+        <div class="form-field-label">Название :</div>
+        <input type="text"
+               required
+               [(ngModel)]="addFormGroup.name"
+               [ngModelOptions]="{standalone: true}"
+               (keyup)="checkFieldValidation()">
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button class="form-button" *ngIf="!isUpdateForm"
+              [ngClass]="{'disabled': isContinueButtonDisabled}"
+              (click)="addCompany()"
+              [disabled]="isContinueButtonDisabled">
+        Добавить
+      </button>
+      <button class="form-button" *ngIf="isUpdateForm"
+              [ngClass]="{'disabled': isContinueButtonDisabled}"
+              (click)="updateCompany()"
+              [disabled]="isContinueButtonDisabled">
+        Изменить
+      </button>
+      <button class="form-button" (click)="closeAddForm()">Отмена</button>
+    </div>
+  </form>
+</div>
