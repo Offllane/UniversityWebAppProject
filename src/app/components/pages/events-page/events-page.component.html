@@ -1,1 +1,8 @@
-<p>events-page works!</p>
+<div class="events-wrapper">
+  <div>
+    <div class="event-inform"
+         *ngFor="let companyEvent of studentsEventsList">
+      {{companyEvent.id}}: {{companyEvent.company?.name}}, {{companyEvent.date}}, {{companyEvent.student.name}}, {{companyEvent.text}}
+    </div>
+  </div>
+</div>

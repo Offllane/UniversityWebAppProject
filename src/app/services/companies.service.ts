@@ -37,6 +37,11 @@ export class CompaniesService {
   }
 
   public addCompany(company: ICompany): void {
+    let maxId = this.arrayMax(this.dataCompanies.map(company => company.id));
+    company = {
+      ...company,
+      id: maxId + 1
+    }
     this.dataCompanies.unshift(company);
     this.companyListSubject.next(this.dataCompanies);
   }
@@ -55,5 +60,11 @@ export class CompaniesService {
     this.companyListSubject.next(this.dataCompanies);
     this.changeDeleteFormState(false);
     this.currentActiveCompanyIndexSubject.next(null);
+  }
+
+  private arrayMax(arr: Array<any>) {
+    return arr.reduce(function (p, v) {
+      return ( p > v ? p : v );
+    });
   }
 }
