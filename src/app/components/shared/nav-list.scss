@@ -3,7 +3,10 @@
   flex-direction: column;
   height: calc(100% - 50px);
   width: 100%;
-  border: 1px solid black;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 9px 35px 4px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
 }
 
 .nav-list-buttons {
@@ -11,12 +14,14 @@
   justify-content: flex-start;
   align-items: center;
   height: 47px;
-  border: 1px solid black;
+  border-radius: 10px 10px 0 0;
+  background-color: #fff;
   border-bottom: none;
 
   .nav-list-button {
     width: 45px;
     height: 45px;
+    border-radius: 4px;
 
   }
 
@@ -34,6 +39,7 @@
     width: 100%;
     padding: 10px;
     cursor: pointer;
+    border-radius: 4px;
 
     &.active {
       background-color: #eaeaea;
@@ -43,5 +49,23 @@
     &:hover {
       background-color: #eaeaea;
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #405261;
+    border-radius: 3px;
+    opacity: .4;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
   }
 }

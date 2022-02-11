@@ -2,8 +2,10 @@
   width: 100%;
   height: 100%;
   max-height: 85vh;
-  padding: 10px;
-  border: 1px solid black;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 9px 35px 4px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
   overflow: auto;
 
   .event-inform-header {
@@ -32,5 +34,23 @@
     .event-inform-buttons {
       display: flex;
     }
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #405261;
+    border-radius: 3px;
+    opacity: .4;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    opacity: 1;
   }
 }
