@@ -21,12 +21,12 @@ export const Data_Events = [
     company:{id:4, name: 'EPAM'}, student:{id:6, name:'Сергеев С.С.', spec:'ПОИБМС', group:7, year:2017}
   },
   {id:8, date:'2017-02-25', text:'Хакатон 1 место',
-    company: null, student: {id:7, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
+    company: null, student: {id:8, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
   },
   {id:9, date:'2017-11-30', text:'Собеседование',
-    company:{id:5, name: 'IBA'}, student: {id:7, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
+    company:{id:5, name: 'IBA'}, student: {id:8, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
   },
   {id:10, date:'2017-11-30', text:'Собеседование',
-    company: {id:2, name: 'LeverX'}, student: {id:7, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
+    company: {id:2, name: 'LeverX'}, student: {id:8, name:'Александров А.А.', spec:'ПОИБМС', group:7, year:2017}
   }
 ];

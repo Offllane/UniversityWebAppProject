@@ -1,7 +1,10 @@
 .wrapper {
   display: flex;
-  border: 1px solid black;
   width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 9px 35px 4px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
 
   .form {
     display: flex;
@@ -40,6 +43,12 @@
           height: 25px;
           text-indent: 10px;
           font-size: 14px;
+
+
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
         }
 
         select {
